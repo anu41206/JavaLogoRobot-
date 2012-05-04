@@ -1,6 +1,148 @@
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
+package com.logo;                                                                                                                   
+                                                                                                                                    
+                                                                                                                                    
+import java.applet.Applet;                                                                                                          
+import java.awt.Graphics;                                                                                                           
+import java.awt.Label;                                                                                                              
+                                                                                                                                 
+  /*DESCRIPTION                                                                                                                      
+This file demonstrates a simple use of the parser and SAX API.                                                                   
+The XML file that is given to the application is parsed and                                                                      
+prints out some information about the contents of this file.*/                                                                     
+                                                                                                                                 
+                                                                                                                                    
+import java.io.File;                                                                                                                
+import java.io.IOException;                                                                                                         
+import javax.xml.parsers.DocumentBuilder;                                                                                           
+import javax.xml.parsers.DocumentBuilderFactory;                                                                                    
+import javax.xml.parsers.ParserConfigurationException;                                                                              
+                                                                                                                                    
+import org.w3c.dom.Document;                                                                                                        
+import org.w3c.dom.Element;                                                                                                         
+import org.w3c.dom.Node;                                                                                                            
+import org.w3c.dom.NodeList;                                                                                                        
+import org.xml.sax.SAXException;                                                                                                    
+                                                                                                                                    
+//<applet code="TestApplet.class" width=100 height=140></applet>                                                                    
+                                                                                                                                    
+/*The applet's class name must be identical to the flename*/                                                                        
+public class XmlLogo extends Applet {                                                                                               
+                                                                                                                                public static final long serialVersionUID=0;                                                                                  
+	                                                                                                                                
+public void init()                                                                                                           
+	{                                                                                                                               
+// creating a frame                                                                                                      
+ // set the size of the frame                                                                                              
+		                                                                                                                            
+setSize(500,700);                                                                                                           
+   //donot set any lay out                                                                                                  
+setLayout(null);                                                                                                            
+Label lb1 = new Label();                                                                                                    
+lb1.setText("Test Applet");                                                                                                 
+lb1.setBounds(10,10,200,10);                                                                                                
+add(lb1);                                                                                                                   
+		                                                                                                                            
+			                                                                                                                        
+	}//init                                                                                                                         
+	                                                                                                                      
+public void start()                                                                                                           
+	{                                                                                                                               
+		                                                                                                                            
+	}//start                                                                                                                        
+                                                                                                                               
+public void destroy()
+	{                                                                                                                               
+		                                                                                                                            
+	}//destroy                                                                                                                      
+	                                                                                                                      
+public void stop()                                                                                                            
+	{                                                                                                                               
+		                                                                                                                            
+	}//stop                                                                                                                    public void run() throws ParserConfigurationException, SAXException, IOException                                                
+	{                                                                                                                               
+		                                                                                                                            
+	}//run                                                                                                                          
+	                                                                                                                       // This gets executed whenever the applet is asked to redraw                                                             
+  public void paint(Graphics g)                                                                                             
+	                                                                                                                                
+	{                                                                                                                               
+		                                                                                                                            
+/*The steps are                                                                                                              
+ Get a document builder using document builder factory and parse the xml file to create a DOM object                        
+ Get a list of co-ordinate elements from the DOM */                                                                         
+  /*For each co-ordinate element we will get x and y  co-ordnates of both starting and ending point. Create an string   
+		 object and add it to the list(j1,j2).*/ 	                                                                                
+		                                                                                                                            
+                                                                                                                                    
+		                                                                                                                            
+ String j1 ="";                                                                                                       
+String j2 ="";                                                                                                       
+		                                                                                                                            
+		                                                                                                                            
+try{                                                                                                                        
+// Must pass in the name and the location  of the XML file .                                                            
+		                                                                                                                         File file = new File("C:\\XMLLogo.xml");                                                                                    
+ //get the factory                                                                                            
+DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();                                                          
+//Using factory get an instance of document builder                                                           
+DocumentBuilder db = dbf.newDocumentBuilder();                                                                              
+ //parse using builder to get DOM representation of the XML file                                               
+Document document = db.parse(file);                                                                                         
+	  //Get a list of co-ordinates                                                                                  
+document.getDocumentElement().normalize();                                                                                  
+//Get the rootElement from the DOM object.From the root element get all co-ordinate values.                    
+	//Iterate through each co-ordinate to load the data.                                                           
+ NodeList node = document.getElementsByTagName("Draw");                                                                      
+			                                                                                                                        
+//get the root element                                                                                          
+Node firstNode = node.item(0);                                                                                               
+		            //get a nodelist of co-ornidates (x,y)		                                                                
+	if (firstNode.getNodeType() == Node.ELEMENT_NODE) {                                                              
+				                                                                                                                    
+	Element x1element = (Element) firstNode;                                                                     
+//get the co-ordinate element (x)                                                                            
+	NodeList X1ElemntList = x1element.getElementsByTagName("x");                                                 
+	Element X1Element = (Element) X1ElemntList.item(0);                                                          
+// get the cjild nodes of x co-ordinate                                                                      
+ NodeList X1 = X1Element.getChildNodes();                                                                     
+//parsing it to the string and get the exact value                                                              
+	 j1  =(X1.item(0).getNodeValue());                                                                           
+					                                                                                                                
+					                                                                                                                
+ Element x2element = (Element) firstNode;                                                                     
+ NodeList X2ElemntList = x2element.getElementsByTagName("y");                                                 
+ Element X2Element = (Element) X2ElemntList.item(0);                                                          
+ NodeList X2 = X2Element.getChildNodes();                                                                     
+					                                                                                                                
+  j2  =(X2.item(0).getNodeValue());                                                                           
+					                                                                                                                
+		 		                                                                                                                    
+		    }//if                                                                                                                   
+				                                                                                                                    
+				}//try                                                                                                              
+catch (Exception e) {                                                                                                    
+e.printStackTrace();                                                                                            
+				}//catch                                                                                                            
+		                                                                                                                            
+super.paint(g);                                                                                                             
+ // parse the string in to the integer to get the co-ordinate values                                                         
+int x1 =Integer.parseInt(j1);                                                                                               
+int y1 =Integer.parseInt(j2);                                                                                               
+		                                                                                                                            
+//draw the lines using applet using draw()method                                                                            
+// The "drawLine" routine requires 4 numbers:                                                                               
+// the x and y coordinates of the starting point,and the x and y coordinates of the ending point,                  
+// in this case, is upside down (as it often is in 2D graphics programming): the origin is at the                  
+// upper left corner, the x-axis increases to the right, and the y-axis increases downward.                        
+g.drawLine(x1,y1,x1+y1,(y1/2));                                                                                             
+g.drawLine(x1+y1,(y1/2),(y1*2)+x1,y1);                                                                                      
+g.drawLine(x1,y1,(y1*2)+x1,y1*2);                                                                                           
+g.drawLine((y1*2)+x1,y1,x1,y1*2);                                                                                           
+g.drawRect(x1,y1, y1*2, y1);                                                                                                
+		                                                                                                                            
+	                                                                                                                                
+	}//paint                                                                                                                        
+		                                                                                                                            
+}//class                                                                                                                            
+                                                                                                                                    
+                                                                                                                                    
